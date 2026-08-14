@@ -10,6 +10,9 @@ export default defineConfig({
   server: {
     host: true,
   },
+  build: {
+    chunkSizeWarningLimit: 2000,
+  },
   plugins: [
     tailwindcss(),
     tanstackStart({
