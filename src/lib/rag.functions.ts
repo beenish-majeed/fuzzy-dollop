@@ -71,7 +71,7 @@ const AskInput = z.object({
 const DeleteInput = z.object({ id: z.string().uuid() });
 
 export const ingestDocument = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => IngestInput.parse(input))
+  .validator((input: unknown) => IngestInput.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { embedAll } = await import("./rag.server");
@@ -211,7 +211,7 @@ export const listDocuments = createServerFn({ method: "GET" }).handler(async () 
 });
 
 export const deleteDocument = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => DeleteInput.parse(input))
+  .validator((input: unknown) => DeleteInput.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     try {
@@ -241,7 +241,7 @@ export interface Citation {
 }
 
 export const askQuestion = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => AskInput.parse(input))
+  .validator((input: unknown) => AskInput.parse(input))
   .handler(async ({ data }) => {
     const started = Date.now();
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
