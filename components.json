@@ -1,5 +1,4 @@
 {
-  "$schema": "https://shadcn.com/schema.json",
   "style": "new-york",
   "rsc": false,
   "tsx": true,
