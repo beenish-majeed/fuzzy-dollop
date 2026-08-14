@@ -1,0 +1,225 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Engineering Intelligence Hub — design system.
+ * Deep-space engineering aesthetic: graphite surfaces, signal-cyan primary,
+ * plasma-violet accent, mono type for technical metadata.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --radius: 0.9rem;
+
+  --background: oklch(0.968 0.006 240);
+  --foreground: oklch(0.22 0.03 250);
+  --card: oklch(0.995 0.003 240);
+  --card-foreground: oklch(0.22 0.03 250);
+  --popover: oklch(0.995 0.003 240);
+  --popover-foreground: oklch(0.22 0.03 250);
+  --primary: oklch(0.6 0.135 225);
+  --primary-foreground: oklch(0.99 0.005 220);
+  --secondary: oklch(0.93 0.012 240);
+  --secondary-foreground: oklch(0.28 0.03 250);
+  --muted: oklch(0.93 0.01 240);
+  --muted-foreground: oklch(0.48 0.02 250);
+  --accent: oklch(0.62 0.15 300);
+  --accent-foreground: oklch(0.99 0.005 300);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.99 0.005 25);
+  --success: oklch(0.62 0.14 160);
+  --success-foreground: oklch(0.99 0.005 160);
+  --warning: oklch(0.72 0.15 75);
+  --warning-foreground: oklch(0.22 0.03 75);
+  --border: oklch(0.87 0.012 245);
+  --input: oklch(0.9 0.012 245);
+  --ring: oklch(0.6 0.135 225);
+
+  --glass: oklch(1 0 0 / 62%);
+  --glass-border: oklch(0.55 0.05 245 / 18%);
+  --grid-line: oklch(0.55 0.05 245 / 9%);
+  --aura-1: oklch(0.72 0.16 225 / 40%);
+  --aura-2: oklch(0.7 0.17 300 / 32%);
+  --aura-3: oklch(0.78 0.15 170 / 26%);
+}
+
+.dark {
+  --background: oklch(0.16 0.024 258);
+  --foreground: oklch(0.95 0.008 240);
+  --card: oklch(0.21 0.028 258);
+  --card-foreground: oklch(0.95 0.008 240);
+  --popover: oklch(0.19 0.026 258);
+  --popover-foreground: oklch(0.95 0.008 240);
+  --primary: oklch(0.79 0.15 205);
+  --primary-foreground: oklch(0.17 0.03 240);
+  --secondary: oklch(0.27 0.03 258);
+  --secondary-foreground: oklch(0.93 0.01 240);
+  --muted: oklch(0.26 0.028 258);
+  --muted-foreground: oklch(0.7 0.02 250);
+  --accent: oklch(0.74 0.16 305);
+  --accent-foreground: oklch(0.17 0.03 300);
+  --destructive: oklch(0.68 0.19 22);
+  --destructive-foreground: oklch(0.16 0.03 25);
+  --success: oklch(0.76 0.15 165);
+  --success-foreground: oklch(0.16 0.03 165);
+  --warning: oklch(0.82 0.15 80);
+  --warning-foreground: oklch(0.16 0.03 80);
+  --border: oklch(0.98 0.01 240 / 12%);
+  --input: oklch(0.98 0.01 240 / 16%);
+  --ring: oklch(0.79 0.15 205);
+
+  --glass: oklch(0.24 0.03 258 / 55%);
+  --glass-border: oklch(0.9 0.02 240 / 12%);
+  --grid-line: oklch(0.85 0.03 240 / 6%);
+  --aura-1: oklch(0.62 0.19 220 / 45%);
+  --aura-2: oklch(0.55 0.2 300 / 38%);
+  --aura-3: oklch(0.65 0.17 175 / 26%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+@utility glass-panel {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--foreground) 0%,
+    var(--primary) 55%,
+    var(--accent) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grid-backdrop {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--background),
+    0 0 0 4px var(--ring);
+}
+
+@keyframes aura-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -5%, 0) scale(1.18);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1400%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-node {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(from var(--primary) l c h / 45%);
+  }
+  50% {
+    box-shadow: 0 0 0 10px oklch(from var(--primary) l c h / 0%);
+  }
+}
+
+.animate-aura {
+  animation: aura-drift 22s ease-in-out infinite;
+}
+
+.animate-scan {
+  animation: scan-sweep 3.2s linear infinite;
+}
+
+.animate-node {
+  animation: pulse-node 1.6s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aura,
+  .animate-scan,
+  .animate-node {
+    animation: none;
+  }
+}
