@@ -3,7 +3,7 @@
  * Features automatic local vector & answer synthesis fallback when no API key is set.
  */
 
-const GATEWAY = "https://ai.gateway.lovable.dev/v1";
+const GATEWAY = process.env["AI_GATEWAY_URL"] || "https://ai.gateway.lovable.dev/v1";
 export const EMBEDDING_MODEL = "openai/text-embedding-3-small";
 export const EMBEDDING_DIMS = 1536;
 export const CHAT_MODEL = "google/gemini-3.6-flash";
@@ -20,11 +20,12 @@ export class GatewayError extends Error {
 
 function getApiKey(): string | null {
   const key =
-    process.env["LOVABLE_API_KEY"] ||
     process.env["AI_GATEWAY_API_KEY"] ||
     process.env["OPENAI_API_KEY"] ||
-    process.env["VITE_LOVABLE_API_KEY"] ||
-    process.env["VITE_OPENAI_API_KEY"];
+    process.env["LOVABLE_API_KEY"] ||
+    process.env["VITE_AI_GATEWAY_API_KEY"] ||
+    process.env["VITE_OPENAI_API_KEY"] ||
+    process.env["VITE_LOVABLE_API_KEY"];
   return key && key.trim().length > 0 ? key.trim() : null;
 }
 
@@ -37,12 +38,14 @@ function friendly(status: number, body: string): GatewayError {
 }
 
 async function gatewayFetch(path: string, payload: unknown, apiKey: string): Promise<Response> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${apiKey}`,
+    "Lovable-API-Key": apiKey,
+  };
   const res = await fetch(`${GATEWAY}${path}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Lovable-API-Key": apiKey,
-    },
+    headers,
     body: JSON.stringify(payload),
   });
   if (!res.ok) throw friendly(res.status, await res.text());
